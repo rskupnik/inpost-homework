@@ -14,7 +14,7 @@ spec:
       labels:
         app: {{ .Values.name }}
       annotations:
-        checksum/config: {{ .Values.config | sha256sum | quote }}  # checksum for rolling updates
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: {{ .Values.name }}

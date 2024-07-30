@@ -1,7 +1,6 @@
 # Default values
 replicaCount: 1
 name: test
-fullname: test
 image:
   repository: busybox
   tag: stable
