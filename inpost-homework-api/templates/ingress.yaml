@@ -12,10 +12,10 @@ spec:
         paths:
           {{- range .Values.ingress.paths }}
             - path: {{ .path }}
-            pathType: {{ .pathType }}
-            backend:
-              service:
-                name: {{ .name }}
-                port:
-                  number: {{ .port }}
+              pathType: {{ .pathType }}
+              backend:
+                service:
+                  name: {{ .name }}
+                  port:
+                    number: {{ .port }}
           {{- end }}
