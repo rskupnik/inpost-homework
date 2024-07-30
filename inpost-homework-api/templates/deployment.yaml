@@ -48,17 +48,19 @@ spec:
               memory: "512Mi"
               cpu: "1000m"
 
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+          # Disabled as the app is a fake
+          #livenessProbe:
+          #  tcpSocket:
+          #    port: 8080
+          #  initialDelaySeconds: 30
+          #  periodSeconds: 10
 
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          # Disabled as the app is a fake
+          #readinessProbe:
+          #  tcpSocket:
+          #    port: 8080
+          #  initialDelaySeconds: 5
+          #  periodSeconds: 10
 
           volumeMounts:
             - mountPath: /app
