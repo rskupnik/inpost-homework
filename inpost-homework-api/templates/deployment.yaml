@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include ".Values.name" . }}
+  name: {{ .Values.name }}
   labels:
-    app: {{ include ".Values.name" . }}
+    app: {{ .Values.name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include ".Values.name" . }}
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: {{ include ".Values.name" . }}
+        app: {{ .Values.name }}
       annotations:
         checksum/config: {{ .Values.config | sha256sum | quote }}  # checksum for rolling updates
     spec:
       containers:
-        - name: {{ include ".Values.name" . }}
+        - name: {{ .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - name: api
