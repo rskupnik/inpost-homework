@@ -47,19 +47,19 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "1000m"
+
           livenessProbe:
-            httpGet:
-              path: /api
-              port: api
-            failureThreshold: 1
-            periodSeconds: 60
-            terminationGracePeriodSeconds: 60
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
           readinessProbe:
-            httpGet:
-              path: /api
-              port: api
-            failureThreshold: 1
-            periodSeconds: 60
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
           volumeMounts:
             - mountPath: /app
               name: config
