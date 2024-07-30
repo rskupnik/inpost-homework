@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "inpost-homework-api.fullname" . }}
+  labels:
+    app: {{ include "inpost-homework-api.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "inpost-homework-api.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "inpost-homework-api.name" . }}
+      annotations:
+        checksum/config: {{ .Values.config | sha256sum | quote }}  # checksum for rolling updates
+    spec:
+      containers:
+        - name: {{ include "inpost-homework-api.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: api
+              containerPort: 8080
+            - name: logs
+              containerPort: 8081
+            - name: soap
+              containerPort: 8082
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          args:
+            - "--spring.profiles.active=dev"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "wget http://localhost:8080/service/shutdown"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"

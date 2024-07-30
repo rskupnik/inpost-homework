@@ -1,0 +1,21 @@
+# Default values
+replicaCount: 1
+name: test
+fullname: test
+image:
+  repository: busybox
+  tag: stable
+service:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+    - port: 8081
+      targetPort: 8081
+    - port: 8082
+      targetPort: 8082
+ingress:
+  hosts: []
+secret:
+  username: ""
+  password: ""

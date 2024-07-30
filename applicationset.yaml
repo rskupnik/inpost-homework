@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: inpost-homework-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev-global-cluster-0
+            namespace: dev
+            valuesRepoPath: dev-values.yaml
+          - cluster: prd-global-cluster-5
+            namespace: prd
+            valuesRepoPath: prd-values.yaml
+  template:
+    metadata:
+      name: 'inpost-{{cluster}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/rskupnik/inpost-homework'
+        #repoURL: 'file:///mnt/local-repo/inpost-homework-api'
+        targetRevision: HEAD
+        path: './'
+        helm:
+          valueFiles:
+            - 'https://github.com/rskupnik/inpost-homework-values/{{valuesRepoPath}}'
+            #- '/mnt/local-repo-values/{{valuesRepoPath}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
