@@ -47,3 +47,13 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "1000m"
+          volumeMounts:
+            - mountPath: /app
+              name: {{ .Values.name }}-config
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.name }}-config
+            items:
+              - key: config.json
+                path: config.json
