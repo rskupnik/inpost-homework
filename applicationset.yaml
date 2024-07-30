@@ -21,11 +21,11 @@ spec:
       source:
         repoURL: 'https://github.com/rskupnik/inpost-homework'
         #repoURL: 'file:///mnt/local-repo/inpost-homework-api'
-        targetRevision: HEAD
-        path: './'
+        targetRevision: master
+        path: './inpost-homework-api'
         helm:
           valueFiles:
-            - 'https://github.com/rskupnik/inpost-homework-values/{{valuesRepoPath}}'
+            - 'https://raw.githubusercontent.com/rskupnik/inpost-homework-values/master/{{valuesRepoPath}}'
             #- '/mnt/local-repo-values/{{valuesRepoPath}}'
       destination:
         server: 'https://kubernetes.default.svc'

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "inpost-homework-api.fullname" . }}
+  name: {{ include "inpost-homework-api.name" . }}
   labels:
     app: {{ include "inpost-homework-api.name" . }}
 spec:
