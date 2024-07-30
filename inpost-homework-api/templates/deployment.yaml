@@ -32,11 +32,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          args: [
-            /bin/sh,
-            -c,
-            'echo \"Hello World\"'
-          ]
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
           lifecycle:
             preStop:
               exec:
