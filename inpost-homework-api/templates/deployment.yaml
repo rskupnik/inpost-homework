@@ -32,8 +32,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          args:
-            - "--spring.profiles.active=dev"
+          args: [
+            /bin/sh,
+            -c,
+            'echo \"Hello World\"'
+          ]
           lifecycle:
             preStop:
               exec:
