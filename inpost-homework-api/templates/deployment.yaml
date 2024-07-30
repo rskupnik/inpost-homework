@@ -60,7 +60,6 @@ spec:
               port: api
             failureThreshold: 1
             periodSeconds: 60
-            terminationGracePeriodSeconds: 60
           volumeMounts:
             - mountPath: /app
               name: config
