@@ -32,8 +32,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+          # Just to simulate the app running
           command: [ "/bin/sh", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
+          # Would add - "--spring.profiles.active={ .Values.env }" here to add the proper arguments
           lifecycle:
             preStop:
               exec:
