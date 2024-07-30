@@ -20,6 +20,7 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
           ports:
             - name: api
               containerPort: 8080
@@ -27,11 +28,13 @@ spec:
               containerPort: 8081
             - name: soap
               containerPort: 8082
+
           env:
             - name: POD_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+
           # Just to simulate the app running
           command: [ "/bin/sh", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
