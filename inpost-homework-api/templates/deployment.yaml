@@ -35,10 +35,11 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
 
-          # Just to simulate the app running
-          command: [ "/bin/sh", "-c", "--" ]
-          args: [ "while true; do sleep 30; done;" ]
-          # Would add - "--spring.profiles.active={ .Values.env }" here to add the requested arguments
+          # Enable these to simulate the app running (disable the spring.profiles args and probes)
+          #command: [ "/bin/sh", "-c", "--" ]
+          #args: [ "while true; do sleep 30; done;" ]
+          args:
+            - "--spring.profiles.active={ .Values.env }"
 
           lifecycle:
             preStop:
@@ -53,19 +54,19 @@ spec:
               memory: "512Mi"
               cpu: "1000m"
 
-          # Disabled as the app is a fake
-          #livenessProbe:
-          #  tcpSocket:
-          #    port: 8080
-          #  initialDelaySeconds: 30
-          #  periodSeconds: 10
+          # Disable these if testing the app
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
 
-          # Disabled as the app is a fake
-          #readinessProbe:
-          #  tcpSocket:
-          #    port: 8080
-          #  initialDelaySeconds: 5
-          #  periodSeconds: 10
+          # Disable these if testing the app
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
 
           volumeMounts:
             - mountPath: /app
