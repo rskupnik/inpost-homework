@@ -35,11 +35,13 @@ spec:
           # Just to simulate the app running
           command: [ "/bin/sh", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
-          # Would add - "--spring.profiles.active={ .Values.env }" here to add the proper arguments
+          # Would add - "--spring.profiles.active={ .Values.env }" here to add the requested arguments
+
           lifecycle:
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "wget http://localhost:8080/service/shutdown"]
+                command: [ "wget", "http://localhost:8080/service/shutdown" ]
+
           resources:
             requests:
               memory: "256Mi"
