@@ -6,10 +6,10 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: {{ .Values.ingress.hosts.host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
-          {{- range .Values.ingress.hosts.paths }}
+          {{- range .Values.ingress.paths }}
             - path: {{ .path }}
             pathType: {{ .pathType }}
             backend:
