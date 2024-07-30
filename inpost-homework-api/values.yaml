@@ -1,5 +1,6 @@
 # Default values
 replicaCount: 1
+namespace: inpost-default
 name: test
 image:
   repository: busybox
